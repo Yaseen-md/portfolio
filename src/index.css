@@ -1,0 +1,228 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 15% 10%; /* Dark Navy Blue */
+    --foreground: 210 40% 98%;
+    --card: 220 15% 12%; 
+    --card-foreground: 210 40% 98%;
+    --popover: 220 15% 10%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 180 70% 45%; /* Teal */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 220 15% 18%; 
+    --secondary-foreground: 210 40% 98%;
+    --muted: 220 15% 18%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 150 70% 50%; /* Neon Green / Aqua */
+    --accent-foreground: 220 15% 10%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 220 15% 25%; 
+    --input: 220 15% 15%; 
+    --ring: 180 70% 55%; 
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+  }
+  ::selection {
+    background-color: hsl(var(--primary) / 0.5);
+    color: hsl(var(--primary-foreground));
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-border {
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.5rem;
+  padding: 2px; /* Border thickness */
+  background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)));
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.hero-gradient {
+  background: radial-gradient(circle at 50% 30%, hsl(var(--primary) / 0.1), transparent 60%),
+              radial-gradient(ellipse at 20% 80%, hsl(var(--accent) / 0.05), transparent 70%);
+}
+
+.project-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.project-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 10px 20px hsl(var(--background) / 0.2);
+}
+
+.nav-link {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)));
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.skill-item {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.skill-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, hsl(var(--primary) / 0.1), hsl(var(--accent) / 0.1));
+  z-index: -1;
+  transform: translateX(-101%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.skill-item:hover::before {
+  transform: translateX(0);
+}
+
+.cursor {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: hsl(var(--accent));
+  position: fixed;
+  pointer-events: none;
+  mix-blend-mode: normal;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+}
+
+.cursor-follower {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid hsl(var(--primary) / 0.5);
+  background-color: transparent;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+}
+
+.cursor.hover ~ .cursor-follower {
+  width: 40px;
+  height: 40px;
+  border-color: hsl(var(--accent) / 0.7);
+  opacity: 0.7;
+}
+.cursor.click {
+  width: 8px;
+  height: 8px;
+  background-color: hsl(var(--primary));
+}
+
+
+.scroll-down {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.section-heading {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+.section-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)));
+  border-radius: 2px;
+}
+
+.contact-input {
+  transition: all 0.3s ease;
+  border-width: 1px;
+}
+
+.contact-input:focus {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2);
+}
+
+.social-icon {
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px) scale(1.1);
+  color: hsl(var(--accent));
+}
+
+/* Parallax effect for headers could be added with JS if needed, or simple CSS background-attachment */
+[id^="section-"] { /* Example for potential parallax */
+  /* background-attachment: fixed; */ /* This is a simple way but might not be smooth enough */
+}
+
+/* Smooth fade-in on scroll can be achieved with Framer Motion's `whileInView` prop, already in use */
