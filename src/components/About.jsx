@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 const About = () => {
   const fullName = "Mohammed Yaseen"; 
   const email = "mmohammedyaseen87@email.com";
-  const professionalTitle = "Aspiring Marine Data Scientist | AI/ML & Environmental Data Enthusiast";
+  const professionalTitle = "Aspiring Data Scientist | AI/ML & Environmental Data Enthusiast";
   const shortBio = "I’m an aspiring Marine Data Scientist with a background in AI/ML, currently pursuing a B.Tech in AIML. Passionate about bridging marine biology with data-driven solutions, I blend my technical skills with an environmental vision to solve real-world problems.";
 
 

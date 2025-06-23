@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 
 const Hero = () => {
   const fullName = "Mohammed Yaseen"; 
-  const professionalTitle = "Aspiring Marine Data Scientist | AI/ML & Environmental Data Enthusiast";
+  const professionalTitle = "Aspiring Data Scientist | AI/ML & Environmental Data Enthusiast";
   const bio = "I build exceptional and accessible digital experiences for the web. Passionate about creating beautiful, functional, and user-centered digital experiences.";
   const githubLink = "https://github.com/Yaseen-md";
   const linkedinLink = "https://www.linkedin.com/in/mohammed-yaseen-843638223/";
