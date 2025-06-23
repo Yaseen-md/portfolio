@@ -58,7 +58,7 @@ const About = () => {
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-lg blur-lg"></div>
               <div className="relative rounded-lg overflow-hidden gradient-border">
-                <img  alt="A marine environment or data visualization representing marine data science" className="w-full h-auto rounded-lg" src="https://images.unsplash.com/photo-1674764617491-89b0b0b48efb" />
+                <img  alt="A marine environment or data visualization representing marine data science" className="w-full h-auto rounded-lg" src="/image.JPG" />
               </div>
             </div>
           </motion.div>

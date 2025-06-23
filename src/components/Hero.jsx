@@ -139,7 +139,7 @@ const Hero = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full filter blur-3xl animate-pulse-slow"></div>
               <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary/20">
-                <img  alt="Profile photo of [Your Full Name]" className="w-full h-full object-cover" src="https://images.unsplash.com/photo-1573483387033-3121eaa077d7" />
+                <img  alt="Profile photo of Mohammed Yaseen" className="w-full h-full object-cover" src="/image.JPG" />
               </div>
             </div>
           </motion.div>
