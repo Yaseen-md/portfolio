@@ -1,5 +1,3 @@
-![Developer coding animation](./public/123.gif)
-
 Mohammed Yaseen Portfolio
 
 A professional portfolio website showcasing my journey as an aspiring Marine Data Scientist with expertise in AI/ML and environmental data solutions. Built with React, Tailwind CSS, Framer Motion, and Firebase, this single-page application features a modern design with smooth animations, a responsive layout, and a functional contact form.
