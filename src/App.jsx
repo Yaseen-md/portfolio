@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from '@/components/ui/toaster';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -78,6 +79,7 @@ const App = () => {
             <Footer />
             <ScrollToTop />
             <Toaster />
+            <Analytics />
           </motion.div>
         )}
       </AnimatePresence>
