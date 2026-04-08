@@ -1,13 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { GraduationCap } from 'lucide-react';
+import { portfolioData } from '@/data/portfolioData';
 
 const Education = () => {
-  const educationDetails = {
-    degree: "B.Tech in Artificial Intelligence & Machine Learning",
-    institution: "Institute of Aeronautical Engineering, Hyderabad", 
-    description: "Focused on leveraging AI and ML techniques to solve complex problems, with a keen interest in applying these skills to marine data science and environmental challenges."
-  };
+  const educationDetails = portfolioData.education;
 
   const containerVariants = {
     hidden: { opacity: 0 },

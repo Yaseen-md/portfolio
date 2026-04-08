@@ -1,37 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, Zap, BookOpen } from 'lucide-react';
+import { portfolioData } from '@/data/portfolioData';
 
 const Experience = () => {
-  const experiences = [
-    {
-      title: "AWS Web Services Intern – NSIC",
-      duration: "2 months (2024)",
-      icon: <Briefcase className="h-5 w-5 text-primary" />,
-      highlights: [
-        "Built and deployed cloud-based solutions using AWS EC2, Lambda, and S3.",
-        "Gained hands-on experience in infrastructure setup and monitoring.",
-      ],
-    },
-    {
-      title: "IoT Outreach Workshop – Technex’23",
-      duration: "Workshop & Hands-on Training",
-      icon: <Zap className="h-5 w-5 text-primary" />,
-      highlights: [
-        "Built mini-projects using microcontrollers.",
-        "Learned IoT protocols and real-time data communication techniques.",
-      ],
-    },
-    {
-      title: "Research Publication",
-      subtitle: "“Deep Learning-Driven Fashion Trend Extraction and Analysis from Instagram”",
-      duration: "Conference: 3rd International Conference on Futuristic Technology 2025 (SciTePress)",
-      icon: <BookOpen className="h-5 w-5 text-primary" />,
-      highlights: [
-        "Role: Co-author; built ML model for trend classification.",
-      ],
-    },
-  ];
+  const experiences = portfolioData.experience.map(exp => ({
+    ...exp,
+    icon: exp.type === 'internship' ? <Briefcase className="h-5 w-5 text-primary" /> :
+      exp.type === 'workshop' ? <Zap className="h-5 w-5 text-primary" /> :
+        <BookOpen className="h-5 w-5 text-primary" />
+  }));
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -48,7 +26,7 @@ const Experience = () => {
 
   return (
     <section id="experience" className="py-20 relative">
-       <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-10 right-10 w-72 h-72 bg-primary/5 rounded-full filter blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-30 left-5 w-60 h-60 bg-accent/5 rounded-full filter blur-3xl animate-pulse-slow"></div>
       </div>
@@ -77,18 +55,21 @@ const Experience = () => {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="flex flex-col md:flex-row items-start gap-6"
+              className="flex flex-col md:flex-row items-start gap-6 bg-secondary/10 p-6 rounded-2xl glass-border group hover:bg-secondary/20 transition-all duration-300"
             >
-              <div className="flex-shrink-0 w-16 h-16 rounded-full bg-secondary/30 flex items-center justify-center gradient-border">
+              <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-secondary/30 flex items-center justify-center glass-border transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                 {exp.icon}
               </div>
               <div className="flex-grow">
-                <h3 className="text-xl font-semibold text-primary">{exp.title}</h3>
-                {exp.subtitle && <p className="text-md font-medium text-foreground/80 mt-1">{exp.subtitle}</p>}
-                <p className="text-sm text-foreground/60 mb-3">{exp.duration}</p>
-                <ul className="list-disc list-inside space-y-1 text-foreground/70">
+                <h3 className="text-xl font-bold text-white group-hover:text-primary transition-colors">{exp.title}</h3>
+                {exp.subtitle && <p className="text-md font-medium text-white/80 mt-1">{exp.subtitle}</p>}
+                <p className="text-sm text-white/50 mb-4 font-medium uppercase tracking-wider">{exp.duration}</p>
+                <ul className="space-y-3">
                   {exp.highlights.map((highlight, i) => (
-                    <li key={i}>{highlight}</li>
+                    <li key={i} className="text-white/70 text-sm flex items-start">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 mr-3 flex-shrink-0"></span>
+                      {highlight}
+                    </li>
                   ))}
                 </ul>
               </div>

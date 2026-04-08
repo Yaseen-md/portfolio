@@ -1,22 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, CheckSquare } from 'lucide-react';
+import { Award, CheckSquare, Wrench } from 'lucide-react';
+import { portfolioData } from '@/data/portfolioData';
 
 const Certifications = () => {
-  const certifications = [
-    {
-      title: "AWS Training",
-      issuer: "Amazon Web Services",
-      description: "Completed comprehensive training on AWS core services and cloud architecture.",
-      icon: <Award className="h-5 w-5 text-primary" />
-    },
-    {
-      title: "IoT Workshop",
-      issuer: "Technex'23",
-      description: "Hands-on workshop focusing on IoT protocols and microcontroller programming.",
-      icon: <CheckSquare className="h-5 w-5 text-primary" />
-    },
-  ];
+  const certifications = portfolioData.certifications.map(cert => ({
+    ...cert,
+    icon: cert.type === 'award' ? <Award className="h-5 w-5 text-primary" /> :
+      cert.type === 'check' ? <CheckSquare className="h-5 w-5 text-primary" /> :
+        <Wrench className="h-5 w-5 text-primary" />
+  }));
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -33,7 +26,7 @@ const Certifications = () => {
 
   return (
     <section id="certifications" className="py-20 relative">
-       <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-20 right-10 w-72 h-72 bg-primary/5 rounded-full filter blur-3xl animate-pulse-slow"></div>
         <div className="absolute -bottom-20 left-5 w-60 h-60 bg-accent/5 rounded-full filter blur-3xl animate-pulse-slow"></div>
       </div>
@@ -62,16 +55,16 @@ const Certifications = () => {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="bg-secondary/20 backdrop-blur-sm rounded-lg p-6 gradient-border hover:shadow-lg transition-all duration-300"
-              whileHover={{ y: -5 }}
+              className="bg-secondary/10 backdrop-blur-md rounded-2xl p-6 glass-border hover:shadow-xl transition-all duration-300 group"
+              whileHover={{ y: -10 }}
             >
               <div className="flex items-start mb-4">
                 <div className="p-2 bg-secondary/30 rounded-md mr-4">
                   {cert.icon}
                 </div>
                 <div>
-                    <h3 className="text-xl font-semibold text-primary">{cert.title}</h3>
-                    <p className="text-sm text-foreground/60 mb-2">{cert.issuer}</p>
+                  <h3 className="text-xl font-semibold text-primary">{cert.title}</h3>
+                  <p className="text-sm text-foreground/60 mb-2">{cert.issuer}</p>
                 </div>
               </div>
               <p className="text-foreground/70 text-sm">{cert.description}</p>

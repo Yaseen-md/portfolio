@@ -11,7 +11,6 @@ import Education from '@/components/Education';
 import Certifications from '@/components/Certifications';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import Cursor from '@/components/Cursor';
 import Loader from '@/components/Loader';
 import ScrollToTop from '@/components/ScrollToTop';
 
@@ -63,7 +62,6 @@ const App = () => {
             transition={{ duration: 0.5 }}
             className="min-h-screen bg-background text-foreground overflow-hidden"
           >
-            <Cursor />
             <Navbar activeSection={activeSection} />
             <main>
               <Hero />

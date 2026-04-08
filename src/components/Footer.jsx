@@ -1,10 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
+import { portfolioData } from '@/data/portfolioData';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const fullName = "Mohammed Yaseen"; 
+  const { name: fullName } = portfolioData.personalInfo;
   const callToAction = "Let’s collaborate & build something amazing!";
 
   const scrollToContact = () => {
@@ -19,7 +20,7 @@ const Footer = () => {
         <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/5 rounded-full filter blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-accent/5 rounded-full filter blur-3xl animate-pulse-slow"></div>
       </div>
-      
+
       <div className="container mx-auto px-6 relative z-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -41,14 +42,14 @@ const Footer = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mb-6"
         >
-           <button 
+          <button
             onClick={scrollToContact}
             className="px-6 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/80 transition-colors font-medium"
           >
             Get in Touch
           </button>
         </motion.div>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

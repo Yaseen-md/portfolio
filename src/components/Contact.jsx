@@ -4,14 +4,10 @@ import { Mail, Phone, MapPin, Github, Linkedin, Instagram } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
 import ContactInfoItem from '@/components/ContactInfoItem';
 import SocialLink from '@/components/SocialLink';
+import { portfolioData } from '@/data/portfolioData';
 
 const Contact = () => {
-  const email = "mmohammedyaseen87@gmail.com";
-  const phone = "+91 7075015786"; 
-  const location = "Hyderabad, India"; 
-  const githubLink = "https://github.com/Yaseen-md";
-  const linkedinLink = "https://www.linkedin.com/in/mohammed-yaseen-843638223/";
-  const InstagramLink = "https://instagram.com/_.yaseen22";
+  const { email, phone, location, github: githubLink, linkedin: linkedinLink, instagram: InstagramLink } = portfolioData.personalInfo;
 
   const contactInfo = [
     {
@@ -35,9 +31,9 @@ const Contact = () => {
   ];
 
   const socialLinks = [
-    { href: githubLink, icon: <Github size={24}/>, label: "GitHub" },
-    { href: linkedinLink, icon: <Linkedin size={24}/>, label: "LinkedIn" },
-    { href: InstagramLink, icon: <Instagram size={24}/>, label: "Instagram" }
+    { href: githubLink, icon: <Github size={24} />, label: "GitHub" },
+    { href: linkedinLink, icon: <Linkedin size={24} />, label: "LinkedIn" },
+    { href: InstagramLink, icon: <Instagram size={24} />, label: "Instagram" }
   ];
 
   const containerVariants = {
@@ -65,7 +61,7 @@ const Contact = () => {
         <div className="absolute top-20 right-10 w-72 h-72 bg-primary/5 rounded-full filter blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-40 left-20 w-60 h-60 bg-accent/5 rounded-full filter blur-3xl animate-pulse-slow"></div>
       </div>
-      
+
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -79,9 +75,9 @@ const Contact = () => {
             Feel free to reach out for project inquiries, collaborations, or just to say hello. I'm always open to discussing new ideas and opportunities.
           </p>
         </motion.div>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <motion.div 
+          <motion.div
             className="lg:col-span-2"
             variants={itemVariants}
             initial="hidden"
@@ -90,14 +86,14 @@ const Contact = () => {
           >
             <ContactForm />
           </motion.div>
-          
+
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
-            <motion.div 
+            <motion.div
               className="bg-secondary/20 backdrop-blur-sm rounded-lg p-6 gradient-border mb-6"
               variants={itemVariants}
             >
@@ -108,8 +104,8 @@ const Contact = () => {
                 ))}
               </div>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               className="bg-secondary/20 backdrop-blur-sm rounded-lg p-6 gradient-border"
               variants={itemVariants}
             >
