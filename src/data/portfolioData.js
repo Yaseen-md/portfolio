@@ -20,30 +20,57 @@ export const portfolioData = {
     projects: [
         {
             id: 1,
-            title: "Instagram Fashion Trend Analysis",
-            description: "A deep learning project analyzing fashion trends using Instagram images and captions. Reached high accuracy in style classification.",
+            title: "Brain Tumor Detection System",
+            description: "AI-powered brain tumor detection from MRI scans using PyTorch and Streamlit with Grad-CAM visualizations for interpretable machine learning.",
             image: "instagram-fashion-trends",
-            tags: ["Python", "TensorFlow", "OpenCV", "Matplotlib"],
-            githubLink: "https://github.com/Yaseen-md/fashion-trend-analysis",
+            tags: ["PyTorch", "Streamlit", "Grad-CAM", "Medical AI"],
+            githubLink: "https://github.com/Yaseen-md/Brain-Tumor-Detector",
             liveLink: "#"
         },
         {
             id: 2,
-            title: "Smart Parking System",
-            description: "An IoT system using ultrasonic sensors and NodeMCU to detect parking slot availability in real-time.",
+            title: "RAG-LLM Based Chatbot",
+            description: "An advanced conversational AI system using Retrieval-Augmented Generation (RAG) combined with Large Language Models for intelligent question-answering.",
             image: "smart-parking-system",
-            tags: ["Arduino IDE", "NodeMCU", "IoT", "C++"],
-            githubLink: "https://github.com/Yaseen-md/smart-parking",
+            tags: ["Python", "LLM", "RAG", "NLP"],
+            githubLink: "https://github.com/Yaseen-md/RAG-LLM-Based-chatbot",
             liveLink: "#"
         },
         {
             id: 3,
-            title: "AWS Cloud Portfolio",
-            description: "A professional portfolio architecture deployed using AWS EC2, S3, and Route 53 for high availability.",
+            title: "California Housing Price Prediction",
+            description: "Machine learning project predicting housing prices using the California Housing dataset with data analysis and model optimization techniques.",
             image: "aws-portfolio-deployment",
-            tags: ["AWS EC2", "S3", "Cloud Architecture", "JavaScript"],
-            githubLink: "https://github.com/Yaseen-md/portfolio-aws",
-            liveLink: "https://myaseen-portfolio.vercel.app/"
+            tags: ["Machine Learning", "Pandas", "Scikit-Learn", "Data Analysis"],
+            githubLink: "https://github.com/Yaseen-md/california-housing-prediction",
+            liveLink: "#"
+        },
+        {
+            id: 4,
+            title: "Conversational Travel Advisor",
+            description: "An intelligent travel recommendation system using natural language processing to provide personalized travel suggestions and itineraries.",
+            image: "instagram-fashion-trends",
+            tags: ["Python", "NLP", "AI", "Travel Tech"],
+            githubLink: "https://github.com/Yaseen-md/Conversational-Travel-Advisor",
+            liveLink: "#"
+        },
+        {
+            id: 5,
+            title: "GraphRAG System",
+            description: "Advanced knowledge graph construction with RAG capabilities for semantic-aware information retrieval and knowledge management.",
+            image: "smart-parking-system",
+            tags: ["Python", "Knowledge Graphs", "RAG", "AI"],
+            githubLink: "https://github.com/Yaseen-md/GraphRAG-system",
+            liveLink: "#"
+        },
+        {
+            id: 6,
+            title: "Titanic Data Visualization",
+            description: "Comprehensive data analysis and visualization project on the Titanic dataset with exploratory data analysis and insights extraction.",
+            image: "aws-portfolio-deployment",
+            tags: ["Python", "Data Visualization", "Pandas", "Matplotlib"],
+            githubLink: "https://github.com/Yaseen-md/titanic_data_visualization",
+            liveLink: "#"
         }
     ],
 

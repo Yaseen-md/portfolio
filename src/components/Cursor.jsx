@@ -48,14 +48,14 @@ const Cursor = () => {
       y: mousePosition.y - 10,
       height: 20,
       width: 20,
-      backgroundColor: 'rgba(71, 118, 230, 0.5)',
+      backgroundColor: 'rgba(184, 169, 154, 0.5)',
     },
     hover: {
       x: mousePosition.x - 15,
       y: mousePosition.y - 15,
       height: 30,
       width: 30,
-      backgroundColor: 'rgba(142, 84, 233, 0.5)',
+      backgroundColor: 'rgba(184, 169, 154, 0.5)',
       mixBlendMode: 'difference',
     },
     click: {
@@ -63,7 +63,7 @@ const Cursor = () => {
       y: mousePosition.y - 5,
       height: 10,
       width: 10,
-      backgroundColor: 'rgba(142, 84, 233, 0.8)',
+      backgroundColor: 'rgba(184, 169, 154, 0.8)',
     },
   };
 
@@ -83,7 +83,7 @@ const Cursor = () => {
       y: mousePosition.y - 30,
       height: 60,
       width: 60,
-      backgroundColor: 'rgba(142, 84, 233, 0.1)',
+      backgroundColor: 'rgba(184, 169, 154, 0.1)',
       transition: {
         type: 'spring',
         mass: 0.6,
