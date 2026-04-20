@@ -1,6 +1,6 @@
 # Mohammed Yaseen — Portfolio
 
-A personal portfolio website built with **React + Vite**, styled with **Tailwind CSS**, and animated using **Framer Motion**. The site showcases my journey as an aspiring Marine Data Scientist with expertise in AI/ML and environmental data solutions.
+A personal portfolio website built with **React + Vite**, styled with **Tailwind CSS**, and animated using **Framer Motion**. AI & Data Science graduate focused on Generative AI, Agentic AI, and building intelligent systems.
 
 ---
 
