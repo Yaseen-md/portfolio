@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import SectionHeader from '@/components/SectionHeader';
 import ProjectCard from '@/components/ProjectCard';
+import Reveal from '@/components/Reveal';
 import { portfolioData } from '@/data/portfolioData';
 
 const SelectedWork = ({ onNavigate }) => {
@@ -21,25 +22,23 @@ const SelectedWork = ({ onNavigate }) => {
 
         {/* Lead Project — Full-Width Asymmetric Split on Desktop */}
         {leadProject && (
-          <div className="mb-6">
+          <Reveal delay={40} className="mb-6">
             <ProjectCard project={leadProject} lead onNavigate={onNavigate} />
-          </div>
+          </Reveal>
         )}
 
-        {/* Remaining Featured Projects — Clean 2-Column Grid */}
+        {/* Remaining Featured Projects — Staggered Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {secondaryProjects.map((project) => (
-            <ProjectCard
-              key={project.slug}
-              project={project}
-              onNavigate={onNavigate}
-            />
+          {secondaryProjects.map((project, idx) => (
+            <Reveal key={project.slug} delay={idx * 70} className="h-full">
+              <ProjectCard project={project} onNavigate={onNavigate} />
+            </Reveal>
           ))}
         </div>
 
         {/* Compact Additional Repository Reference */}
         {otherProjects.length > 0 && (
-          <div className="mt-10 pt-6 border-t border-subtle/70">
+          <Reveal delay={120} className="mt-10 pt-6 border-t border-subtle/70">
             <p className="font-mono text-xs uppercase tracking-[0.08em] text-muted mb-4">
               Additional Exploration on GitHub
             </p>
@@ -57,15 +56,18 @@ const SelectedWork = ({ onNavigate }) => {
                     href={item.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-xs font-mono text-secondary hover:text-accent transition-colors duration-fast shrink-0"
+                    className="group inline-flex items-center gap-1 text-xs font-mono text-secondary hover:text-accent transition-colors duration-fast shrink-0"
                   >
                     Repository
-                    <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                    <ArrowUpRight
+                      className="w-3.5 h-3.5 transition-transform duration-fast group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      aria-hidden="true"
+                    />
                   </a>
                 </div>
               ))}
             </div>
-          </div>
+          </Reveal>
         )}
       </div>
     </section>

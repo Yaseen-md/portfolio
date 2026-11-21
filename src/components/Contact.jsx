@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SectionHeader from '@/components/SectionHeader';
+import Reveal from '@/components/Reveal';
 import { portfolioData } from '@/data/portfolioData';
 
 const Contact = () => {
@@ -69,7 +70,7 @@ const Contact = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           {/* Direct Email CTA Column */}
-          <div className="lg:col-span-6">
+          <Reveal delay={40} className="lg:col-span-6">
             <p className="text-base text-secondary leading-relaxed max-w-[54ch]">
               {description}
             </p>
@@ -107,10 +108,10 @@ const Contact = () => {
             <span className="sr-only" role="status" aria-live="polite">
               {copied ? 'Email address copied to clipboard.' : ''}
             </span>
-          </div>
+          </Reveal>
 
           {/* Structured Links Column */}
-          <div className="lg:col-span-6">
+          <Reveal delay={110} className="lg:col-span-6">
             <div className="rounded-xl border border-subtle bg-surface divide-y divide-subtle overflow-hidden">
               {links.map((item) => {
                 const Icon = item.icon;
@@ -139,14 +140,14 @@ const Contact = () => {
                     </div>
 
                     <ArrowUpRight
-                      className="w-4 h-4 text-muted group-hover:text-accent shrink-0 transition-colors duration-fast"
+                      className="w-4 h-4 text-muted group-hover:text-accent transition-[color,transform] duration-fast group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0"
                       aria-hidden="true"
                     />
                   </a>
                 );
               })}
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

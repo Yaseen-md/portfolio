@@ -1,5 +1,6 @@
 import React from 'react';
 import SectionHeader from '@/components/SectionHeader';
+import Reveal from '@/components/Reveal';
 import { portfolioData } from '@/data/portfolioData';
 
 const About = () => {
@@ -11,13 +12,13 @@ const About = () => {
         <SectionHeader index="04" label="About" title="Connecting AI, Quality & Reliability" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          <div className="lg:col-span-5">
+          <Reveal delay={40} className="lg:col-span-5">
             <blockquote className="text-lg sm:text-xl font-medium tracking-[-0.015em] leading-[1.45] text-ink border-l-2 border-accent pl-5">
               {pullLine}
             </blockquote>
-          </div>
+          </Reveal>
 
-          <div className="lg:col-span-7 space-y-5 max-w-[65ch]">
+          <Reveal delay={110} className="lg:col-span-7 space-y-5 max-w-[65ch]">
             {paragraphs.map((paragraph, index) => (
               <p
                 key={index}
@@ -26,7 +27,7 @@ const About = () => {
                 {paragraph}
               </p>
             ))}
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

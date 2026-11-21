@@ -14,7 +14,7 @@ const ProjectCard = ({ project, lead = false, onNavigate }) => {
   return (
     <article
       className={cn(
-        'group rounded-xl border border-subtle bg-surface transition-colors duration-base ease-standard hover:border-strong hover:bg-elevated/50 overflow-hidden',
+        'group rounded-xl border border-subtle bg-surface transition-[border-color,background-color,transform] duration-base ease-standard hover:-translate-y-0.5 hover:border-strong hover:bg-elevated/50 focus-within:border-strong overflow-hidden',
         lead ? 'grid grid-cols-1 lg:grid-cols-12' : 'flex flex-col h-full'
       )}
     >
@@ -27,7 +27,7 @@ const ProjectCard = ({ project, lead = false, onNavigate }) => {
             : 'border-b aspect-[16/10]'
         )}
       >
-        <div className="w-full h-full transition-transform duration-base ease-standard group-hover:scale-[1.015]">
+        <div className="w-full h-full transition-transform duration-base ease-standard group-hover:scale-[1.02]">
           <ProjectDiagram type={project.diagramType} compact={!lead} />
         </div>
       </div>
@@ -92,7 +92,7 @@ const ProjectCard = ({ project, lead = false, onNavigate }) => {
           >
             Read case study
             <ArrowRight
-              className="w-4 h-4 transition-transform duration-fast group-hover:translate-x-0.5"
+              className="w-4 h-4 transition-transform duration-base ease-standard group-hover:translate-x-1"
               aria-hidden="true"
             />
           </a>

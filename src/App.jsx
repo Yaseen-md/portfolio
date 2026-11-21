@@ -9,6 +9,7 @@ import CurrentlyExploring from '@/components/CurrentlyExploring';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import ProjectDetail from '@/components/ProjectDetail';
+import BackToTop from '@/components/BackToTop';
 import { useRouter } from '@/lib/router';
 import { portfolioData } from '@/data/portfolioData';
 
@@ -83,6 +84,7 @@ const App = () => {
       </main>
 
       <Footer onNavigate={navigate} />
+      <BackToTop />
     </div>
   );
 };

@@ -1,8 +1,9 @@
 import React from 'react';
+import Reveal from '@/components/Reveal';
 
 const SectionHeader = ({ index, label, title, description }) => {
   return (
-    <div className="mb-10 md:mb-12 max-w-2xl">
+    <Reveal className="mb-10 md:mb-12 max-w-2xl">
       <p className="font-mono text-xs uppercase tracking-[0.08em] text-muted mb-3">
         <span className="text-accent mr-2">{index}</span>
         {label}
@@ -15,7 +16,7 @@ const SectionHeader = ({ index, label, title, description }) => {
           {description}
         </p>
       )}
-    </div>
+    </Reveal>
   );
 };
 
