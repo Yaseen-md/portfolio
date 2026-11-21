@@ -13,7 +13,8 @@ const ProjectDetail = ({ slug, onNavigate }) => {
   if (!project) {
     return (
       <section className="py-24 page-enter">
-        <div className="max-w-content mx-auto px-5 sm:px-8 lg:px-10 max-w-2xl">
+        <div className="max-w-content mx-auto px-5 sm:px-8 lg:px-10">
+          <div className="max-w-2xl">
           <p className="font-mono text-xs uppercase tracking-[0.08em] text-muted mb-3">
             404 · Not Found
           </p>
@@ -28,6 +29,7 @@ const ProjectDetail = ({ slug, onNavigate }) => {
               <ArrowLeft className="w-4 h-4" aria-hidden="true" />
               Back to selected work
             </Button>
+          </div>
           </div>
         </div>
       </section>

@@ -29,10 +29,12 @@ export function useRouter() {
 
       if (hashPart) {
         requestAnimationFrame(() => {
-          const target = document.getElementById(hashPart);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-          }
+          requestAnimationFrame(() => {
+            const target = document.getElementById(hashPart);
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth' });
+            }
+          });
         });
       } else {
         window.scrollTo({ top: 0, behavior: 'auto' });
