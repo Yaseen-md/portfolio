@@ -8,7 +8,7 @@ export function prefersReducedMotion() {
 }
 
 export function useInViewOnce(options = {}) {
-  const { threshold = 0.12, rootMargin = '0px 0px -40px 0px' } = options;
+  const { threshold = 0.01, rootMargin = '0px' } = options;
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(() => {
     if (prefersReducedMotion()) return true;
@@ -21,10 +21,21 @@ export function useInViewOnce(options = {}) {
     const node = ref.current;
     if (!node) return;
 
+    const checkInView = () => {
+      const rect = node.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        setIsVisible(true);
+        return true;
+      }
+      return false;
+    };
+
+    if (checkInView()) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting || entry.boundingClientRect.top < window.innerHeight) {
             setIsVisible(true);
             observer.disconnect();
             break;
@@ -35,7 +46,20 @@ export function useInViewOnce(options = {}) {
     );
 
     observer.observe(node);
-    return () => observer.disconnect();
+
+    const onScrollFallback = () => {
+      if (checkInView()) {
+        observer.disconnect();
+        window.removeEventListener('scroll', onScrollFallback);
+      }
+    };
+
+    window.addEventListener('scroll', onScrollFallback, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', onScrollFallback);
+    };
   }, [isVisible, threshold, rootMargin]);
 
   return [ref, isVisible];
