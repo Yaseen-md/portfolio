@@ -4,168 +4,67 @@
 
 @layer base {
   :root {
-    /* New Color Palette */
-    --ink-black: #11151c;
-    --ink-black-2: #151b25;
-    --shadow-grey: #19212e;
-    --deep-space-blue: #212d40;
-    --deep-space-blue-2: #273246;
-    --deep-space-blue-3: #2c374b;
-    --charcoal-blue: #313c51;
-    --charcoal-blue-2: #343f54;
-    --charcoal-blue-3: #364156;
-    --charcoal-blue-4: #485265;
-    --text-primary: #E8EDF2;
-    --text-muted: #485265;
-    --accent: #B8A99A;
-    
-    /* Mapped Tailwind variables for compatibility */
-    --background: #11151c;
-    --foreground: #E8EDF2;
-    --card: #19212e;
-    --card-foreground: #E8EDF2;
-    --popover: #151b25;
-    --popover-foreground: #E8EDF2;
-    --primary: #B8A99A;
-    --primary-foreground: #11151c;
-    --secondary: #273246;
-    --secondary-foreground: #E8EDF2;
-    --muted: #485265;
-    --muted-foreground: #485265;
-    --accent-foreground: #11151c;
-    --destructive: #ff4545;
-    --destructive-foreground: #E8EDF2;
-    --border: #273246;
-    --input: #343f54;
-    --ring: #B8A99A;
-    --radius: 0.75rem;
-  }
-}
+    color-scheme: dark;
 
-@layer base {
-  * {
-    @apply border-border;
+    /* Surfaces (space-separated RGB channels for Tailwind alpha utilities) */
+    --bg-base: 11 13 16;           /* #0B0D10 */
+    --bg-surface: 18 22 28;        /* #12161C */
+    --bg-elevated: 23 29 37;       /* #171D25 */
+
+    /* Borders */
+    --border-subtle: 36 43 53;     /* #242B35 */
+    --border-strong: 52 62 77;     /* #343E4D */
+
+    /* Typography */
+    --text-primary: 242 244 247;   /* #F2F4F7 */
+    --text-secondary: 195 202 213; /* #C3CAD5 */
+    --text-muted: 152 162 179;     /* #98A2B3 */
+
+    /* Accents & Semantic Status */
+    --accent: 165 185 255;         /* #A5B9FF */
+    --accent-hover: 189 204 255;   /* #BDCCFF */
+    --accent-secondary: 145 191 174; /* #91BFAE */
+    --status-warning: 232 193 112; /* #E8C170 */
+    --status-danger: 242 139 130;  /* #F28B82 */
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: rgb(var(--bg-base));
+    color: rgb(var(--text-primary));
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    @apply bg-background text-foreground;
-    font-family: 'Poppins', sans-serif;
-    scroll-behavior: smooth;
+    background-color: rgb(var(--bg-base));
+    color: rgb(var(--text-primary));
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.65;
+    overflow-x: clip;
+  }
+
+  section[id] {
+    scroll-margin-top: 5rem;
   }
 
   ::selection {
-    background-color: hsl(var(--accent) / 0.3);
-    color: hsl(var(--accent-foreground));
+    background-color: rgb(var(--accent) / 0.25);
+    color: rgb(var(--text-primary));
+  }
+
+  :where(a, button, input, textarea, summary, [tabindex]):focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
+    border-radius: 6px;
   }
 }
 
-.gradient-text {
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 700;
-}
-
-.glass-glow {
-  position: relative;
-}
-
-.glass-glow::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.06), transparent 40%);
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-}
-
-.glass-glow:hover::before {
-  opacity: 1;
-}
-
-.gradient-border {
-  position: relative;
-  border-radius: 0.5rem;
-  overflow: hidden;
-}
-
-.gradient-border::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 0.5rem;
-  padding: 1px;
-  background: hsl(var(--accent));
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-.hero-gradient {
-  background: radial-gradient(circle at top left, rgba(184, 169, 154, 0.1), transparent 40%),
-    radial-gradient(circle at bottom right, rgba(184, 169, 154, 0.05), transparent 40%),
-    var(--background);
-}
-
-/* Enhanced animations */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(184, 169, 154, 0.3), 0 0 40px rgba(184, 169, 154, 0.1);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(184, 169, 154, 0.5), 0 0 60px rgba(184, 169, 154, 0.2);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
-@keyframes slideInFromLeft {
+@keyframes heroFadeIn {
   from {
     opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInFromRight {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInFromTop {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -173,260 +72,20 @@
   }
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.hero-enter {
+  animation: heroFadeIn 220ms cubic-bezier(0.2, 0, 0, 1) both;
 }
 
-@keyframes bounce-subtle {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-glow {
-  animation: glow 2s ease-in-out infinite;
-}
-
-.animate-shimmer {
-  background: linear-gradient(
-    90deg,
-    rgba(184, 169, 154, 0.1) 25%,
-    rgba(184, 169, 154, 0.2) 50%,
-    rgba(184, 169, 154, 0.1) 75%
-  );
-  background-size: 1000px 100%;
-  animation: shimmer 2s infinite;
-}
-
-.animate-slide-in-left {
-  animation: slideInFromLeft 0.5s ease-out;
-}
-
-.animate-slide-in-right {
-  animation: slideInFromRight 0.5s ease-out;
-}
-
-.animate-slide-in-top {
-  animation: slideInFromTop 0.5s ease-out;
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-.animate-bounce-subtle {
-  animation: bounce-subtle 2s ease-in-out infinite;
-}
-
-/* Hover animations */
-.hover-lift {
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.hover-lift:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(184, 169, 154, 0.3);
-}
-
-.hover-glow {
-  transition: all 0.3s ease;
-}
-
-.hover-glow:hover {
-  box-shadow: 0 0 30px rgba(184, 169, 154, 0.5), 0 0 60px rgba(184, 169, 154, 0.2);
-}
-
-.hover-scale {
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.hover-scale:hover {
-  transform: scale(1.05);
-}
-
-.hover-pulse-accent {
-  transition: all 0.3s ease;
-}
-
-.hover-pulse-accent:hover {
-  color: var(--accent);
-  text-shadow: 0 0 20px rgba(184, 169, 154, 0.5);
-}
-
-.project-card {
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.project-card:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
-}
-
-.nav-link {
-  position: relative;
-  padding-bottom: 4px;
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  background: hsl(var(--primary));
-  transition: width 0.3s ease;
-}
-
-.nav-link:hover::after,
-.nav-link.active::after {
-  width: 100%;
-}
-
-.skill-item {
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.skill-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: hsl(var(--accent) / 0.15);
-  z-index: -1;
-  transform: translateX(-101%);
-  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.skill-item:hover::before {
-  transform: translateX(0);
-}
-
-
-
-.scroll-down {
-  animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateY(0);
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 
-  40% {
-    transform: translateY(-10px);
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
-
-  60% {
-    transform: translateY(-5px);
-  }
-}
-
-.section-heading {
-  position: relative;
-  display: inline-block;
-  padding-bottom: 8px;
-}
-
-.section-heading::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  background: hsl(var(--primary));
-  border-radius: 2px;
-}
-
-.contact-input {
-  transition: all 0.3s ease;
-  border-width: 1px;
-}
-
-.contact-input:focus {
-  border-color: hsl(var(--primary));
-  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2);
-}
-
-.social-icon {
-  transition: all 0.3s ease;
-}
-
-.social-icon:hover {
-  transform: translateY(-3px) scale(1.1);
-  color: hsl(var(--primary));
-}
-
-/* Parallax effect for headers could be added with JS if needed, or simple CSS background-attachment */
-[id^="section-"] {
-  /* Example for potential parallax */
-  /* background-attachment: fixed; */
-  /* This is a simple way but might not be smooth enough */
-}
-
-/* Smooth fade-in on scroll can be achieved with Framer Motion's `whileInView` prop, already in use */
-
-/* Glass Component Borders */
-.glass-border {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.dark .glass-border {
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.spotlight-nav-bg {
-  background-color: rgba(10, 10, 10, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.dark .spotlight-nav-bg {
-  background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.spotlight-nav-shadow {
-  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.4);
-}
-
-.dark .spotlight-nav-shadow {
-  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.7);
-}
-
-.spotlight-nav {
-  --spotlight-color: rgba(255, 255, 255, 0.05);
-  --ambience-color: rgba(255, 255, 255, 1);
-}
-
-.dark .spotlight-nav {
-  --spotlight-color: rgba(255, 255, 255, 0.1);
-  --ambience-color: rgba(255, 255, 255, 1);
 }

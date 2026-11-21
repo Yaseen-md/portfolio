@@ -1,85 +1,89 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Toaster } from '@/components/ui/toaster';
+import React, { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import SelectedWork from '@/components/SelectedWork';
+import Capabilities from '@/components/Capabilities';
+import ExperienceResearch from '@/components/ExperienceResearch';
 import About from '@/components/About';
-import Skills from '@/components/Skills';
-import Experience from '@/components/Experience';
-import Projects from '@/components/Projects';
-import Education from '@/components/Education';
-import Certifications from '@/components/Certifications';
+import CurrentlyExploring from '@/components/CurrentlyExploring';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import Loader from '@/components/Loader';
-import ScrollToTop from '@/components/ScrollToTop';
+import ProjectDetail from '@/components/ProjectDetail';
+import { useRouter } from '@/lib/router';
+import { portfolioData } from '@/data/portfolioData';
+
+const SECTION_IDS = ['home', 'work', 'capabilities', 'experience', 'about', 'exploring', 'contact'];
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
+  const { isHome, projectSlug, navigate } = useRouter();
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
+    if (projectSlug) {
+      const match = portfolioData.featuredProjects.find((p) => p.slug === projectSlug);
+      document.title = match
+        ? `${match.title} — ${portfolioData.personal.name}`
+        : `Not Found — ${portfolioData.personal.name}`;
+    } else {
+      document.title = `${portfolioData.personal.name} — ${portfolioData.personal.roleLine}`;
+    }
+  }, [projectSlug]);
 
   useEffect(() => {
+    if (!isHome) return;
+
     const handleScroll = () => {
-      const sections = ['home', 'about', 'skills', 'experience', 'projects', 'education', 'certifications', 'contact'];
-      
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          const offset = 200;
-          
-          if (rect.top <= offset && rect.bottom >= offset) {
-            setActiveSection(section);
-            break;
-          }
+      const offset = 160;
+      let current = 'home';
+
+      for (const id of SECTION_IDS) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= offset) {
+          current = id;
         }
       }
+
+      setActiveSection(current);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isHome]);
 
   return (
-    <>
-      <AnimatePresence>
-        {loading ? (
-          <Loader key="loader" />
+    <div className="min-h-screen flex flex-col bg-base text-ink">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-base focus:text-sm focus:font-medium"
+      >
+        Skip to main content
+      </a>
+
+      <Navbar activeSection={activeSection} isHome={isHome} onNavigate={navigate} />
+
+      <main id="main-content" className="flex-1">
+        {projectSlug ? (
+          <ProjectDetail slug={projectSlug} onNavigate={navigate} />
+        ) : !isHome ? (
+          <ProjectDetail slug="" onNavigate={navigate} />
         ) : (
-          <motion.div
-            key="content"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="min-h-screen bg-background text-foreground overflow-hidden"
-          >
-            <Navbar activeSection={activeSection} />
-            <main>
-              <Hero />
-              <About />
-              <Skills />
-              <Experience />
-              <Projects />
-              <Education />
-              <Certifications />
-              <Contact />
-            </main>
-            <Footer />
-            <ScrollToTop />
-            <Toaster />
-          </motion.div>
+          <>
+            <Hero onNavigate={navigate} />
+            <SelectedWork onNavigate={navigate} />
+            <Capabilities />
+            <ExperienceResearch />
+            <About />
+            <CurrentlyExploring />
+            <Contact />
+          </>
         )}
-      </AnimatePresence>
-    </>
+      </main>
+
+      <Footer onNavigate={navigate} />
+    </div>
   );
 };
 
