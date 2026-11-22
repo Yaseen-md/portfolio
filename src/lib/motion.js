@@ -87,3 +87,36 @@ export function useInViewOnce(options = {}) {
 
   return [ref, isVisible];
 }
+
+export function useIsInView(options = {}) {
+  const { threshold = 0.01, rootMargin = '80px 0px' } = options;
+  const ref = useRef(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    if (prefersReducedMotion()) {
+      setInView(false);
+      return;
+    }
+
+    const node = ref.current;
+    if (!node || typeof IntersectionObserver === 'undefined') {
+      setInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          setInView(entry.isIntersecting);
+        }
+      },
+      { threshold, rootMargin }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [threshold, rootMargin]);
+
+  return [ref, inView];
+}
