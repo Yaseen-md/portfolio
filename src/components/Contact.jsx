@@ -1,122 +1,154 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Github, Linkedin, Instagram } from 'lucide-react';
-import ContactForm from '@/components/ContactForm';
-import ContactInfoItem from '@/components/ContactInfoItem';
-import SocialLink from '@/components/SocialLink';
+import React, { useState } from 'react';
+import {
+  Mail,
+  Copy,
+  Check,
+  Github,
+  Linkedin,
+  ArrowDownToLine,
+  ArrowUpRight,
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import SectionHeader from '@/components/SectionHeader';
+import { Reveal, SectionDivider } from '@/components/motion';
 import { portfolioData } from '@/data/portfolioData';
 
 const Contact = () => {
-  const { email, phone, location, github: githubLink, linkedin: linkedinLink, instagram: InstagramLink } = portfolioData.personalInfo;
+  const [copied, setCopied] = useState(false);
+  const { email, github, linkedin, resumeUrl, location } = portfolioData.personal;
+  const { heading, description } = portfolioData.contact;
 
-  const contactInfo = [
-    {
-      icon: <Mail className="h-6 w-6 text-primary" />,
-      title: "Email",
-      value: email,
-      link: `mailto:${email}`
-    },
-    {
-      icon: <Phone className="h-6 w-6 text-primary" />,
-      title: "Phone",
-      value: phone,
-      link: `tel:${phone.replace(/\s/g, '')}`
-    },
-    {
-      icon: <MapPin className="h-6 w-6 text-primary" />,
-      title: "Location",
-      value: location,
-      link: null
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2200);
+    } catch {
+      window.location.href = `mailto:${email}`;
     }
-  ];
-
-  const socialLinks = [
-    { href: githubLink, icon: <Github size={24} />, label: "GitHub" },
-    { href: linkedinLink, icon: <Linkedin size={24} />, label: "LinkedIn" },
-    { href: InstagramLink, icon: <Instagram size={24} />, label: "Instagram" }
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
   };
 
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.5 },
+  const links = [
+    {
+      label: 'Email',
+      value: email,
+      href: `mailto:${email}`,
+      icon: Mail,
+      external: false,
+      download: false,
     },
-  };
+    {
+      label: 'GitHub',
+      value: 'github.com/Yaseen-md',
+      href: github,
+      icon: Github,
+      external: true,
+      download: false,
+    },
+    {
+      label: 'LinkedIn',
+      value: 'linkedin.com/in/mohammed-yaseen',
+      href: linkedin,
+      icon: Linkedin,
+      external: true,
+      download: false,
+    },
+    {
+      label: 'Resume',
+      value: 'Mohammed_Yaseen_Resume.pdf',
+      href: resumeUrl,
+      icon: ArrowDownToLine,
+      external: false,
+      download: true,
+    },
+  ];
 
   return (
-    <section id="contact" className="py-20 relative">
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 right-10 w-72 h-72 bg-primary/5 rounded-full filter blur-3xl animate-pulse-slow"></div>
-        <div className="absolute bottom-40 left-20 w-60 h-60 bg-accent/5 rounded-full filter blur-3xl animate-pulse-slow"></div>
-      </div>
+    <section id="contact" className="relative">
+      <SectionDivider />
+      <div className="py-16 md:py-24 max-w-content mx-auto px-5 sm:px-8 lg:px-10">
+        <SectionHeader index="06" label="Contact" title={heading} />
 
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5 }}
-          className="mb-12 text-center"
-        >
-          <h2 className="text-3xl font-bold section-heading inline-block">Get In Touch</h2>
-          <p className="mt-6 text-foreground/70 max-w-2xl mx-auto">
-            Feel free to reach out for project inquiries, collaborations, or just to say hello. I'm always open to discussing new ideas and opportunities.
-          </p>
-        </motion.div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          {/* Direct Email CTA Column */}
+          <Reveal delay={40} className="lg:col-span-6">
+            <p className="text-base text-secondary leading-relaxed max-w-[54ch]">
+              {description}
+            </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <motion.div
-            className="lg:col-span-2"
-            variants={itemVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <ContactForm />
-          </motion.div>
+            <p className="mt-4 font-mono text-xs text-muted">Based in {location}</p>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <motion.div
-              className="bg-secondary/20 backdrop-blur-sm rounded-lg p-6 gradient-border mb-6"
-              variants={itemVariants}
-            >
-              <h3 className="text-xl font-semibold mb-6">Contact Information</h3>
-              <div className="space-y-4">
-                {contactInfo.map((info, index) => (
-                  <ContactInfoItem key={index} icon={info.icon} title={info.title} value={info.value} link={info.link} />
-                ))}
-              </div>
-            </motion.div>
+            <div className="mt-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Button variant="primary" asChild className="w-full sm:w-auto">
+                <a href={`mailto:${email}`}>
+                  <Mail className="w-4 h-4" aria-hidden="true" />
+                  Email me
+                </a>
+              </Button>
 
-            <motion.div
-              className="bg-secondary/20 backdrop-blur-sm rounded-lg p-6 gradient-border"
-              variants={itemVariants}
-            >
-              <h3 className="text-xl font-semibold mb-6">Follow Me</h3>
-              <div className="flex space-x-4">
-                {socialLinks.map((social, index) => (
-                  <SocialLink key={index} href={social.href} icon={social.icon} label={social.label} />
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={handleCopyEmail}
+                className="w-full sm:w-auto"
+              >
+                {copied ? (
+                  <>
+                    <Check className="w-4 h-4 text-accent-secondary" aria-hidden="true" />
+                    Email copied
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-4 h-4 text-muted" aria-hidden="true" />
+                    Copy email address
+                  </>
+                )}
+              </Button>
+            </div>
+
+            <span className="sr-only" role="status" aria-live="polite">
+              {copied ? 'Email address copied to clipboard.' : ''}
+            </span>
+          </Reveal>
+
+          {/* Structured Links Column */}
+          <Reveal delay={110} className="lg:col-span-6">
+            <div className="rounded-xl border border-subtle bg-surface divide-y divide-subtle overflow-hidden">
+              {links.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target={item.external ? '_blank' : undefined}
+                    rel={item.external ? 'noopener noreferrer' : undefined}
+                    download={item.download ? 'Mohammed_Yaseen_Resume.pdf' : undefined}
+                    className="flex items-center justify-between gap-4 px-5 py-4 hover:bg-elevated/60 transition-colors duration-fast group"
+                  >
+                    <div className="flex items-center gap-3.5 min-w-0">
+                      <Icon
+                        className="w-4 h-4 text-accent shrink-0"
+                        aria-hidden="true"
+                      />
+                      <div className="min-w-0">
+                        <p className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted">
+                          {item.label}
+                        </p>
+                        <p className="text-sm text-ink break-all sm:truncate">
+                          {item.value}
+                        </p>
+                      </div>
+                    </div>
+
+                    <ArrowUpRight
+                      className="w-4 h-4 text-muted group-hover:text-accent transition-[color,transform] duration-fast group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0"
+                      aria-hidden="true"
+                    />
+                  </a>
+                );
+              })}
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
