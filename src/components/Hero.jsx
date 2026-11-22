@@ -37,16 +37,16 @@ const Hero = ({ onNavigate }) => {
       <div
         aria-hidden="true"
         className={cn(
-          'pointer-events-none absolute inset-0 hero-tech-grid opacity-60',
+          'pointer-events-none absolute inset-0 hero-tech-grid opacity-85',
           !reducedMotion && 'hero-seq'
         )}
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-[420px]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[460px]"
         style={{
           background:
-            'radial-gradient(60% 55% at 50% 0%, rgba(165, 185, 255, 0.065), transparent 75%)',
+            'radial-gradient(62% 58% at 50% 0%, rgba(165, 185, 255, 0.115), transparent 76%)',
         }}
       />
 

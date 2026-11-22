@@ -27,7 +27,7 @@ const ExperienceResearch = () => {
                 {/* Timeline Node */}
                 <span
                   aria-hidden="true"
-                  className="absolute -left-[29px] sm:-left-[37px] top-8 first:top-4 w-2.5 h-2.5 rounded-full border border-strong bg-base transition-colors duration-fast group-hover:border-accent group-hover:bg-accent/30"
+                  className="absolute -left-[29px] sm:-left-[37px] top-8 first:top-4 w-2.5 h-2.5 rounded-full border border-accent/55 bg-accent/15 transition-colors duration-fast group-hover:border-accent group-hover:bg-accent/40"
                 />
 
                 {/* Left Metadata Column */}

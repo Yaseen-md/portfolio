@@ -6,7 +6,7 @@ export const GlowCard = ({
   children,
   as: Component = 'div',
   className = '',
-  glowColor = 'rgba(165, 185, 255, 0.065)',
+  glowColor = 'rgba(165, 185, 255, 0.12)',
   ...props
 }) => {
   const cardRef = useRef(null);

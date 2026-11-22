@@ -64,11 +64,11 @@
 /* Futuristic Minimalism Atmosphere (Hero Grid & Ambient Light) */
 .hero-tech-grid {
   background-image:
-    linear-gradient(to right, rgb(var(--border-subtle) / 0.32) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(var(--border-subtle) / 0.32) 1px, transparent 1px);
+    linear-gradient(to right, rgb(var(--border-subtle) / 0.55) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--border-subtle) / 0.55) 1px, transparent 1px);
   background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 10%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 10%, transparent 80%);
+  mask-image: radial-gradient(ellipse 78% 70% at 50% 30%, #000 15%, transparent 82%);
+  -webkit-mask-image: radial-gradient(ellipse 78% 70% at 50% 30%, #000 15%, transparent 82%);
 }
 
 /* Hero & Page Entrance */
