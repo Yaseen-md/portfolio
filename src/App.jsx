@@ -10,6 +10,7 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import ProjectDetail from '@/components/ProjectDetail';
 import BackToTop from '@/components/BackToTop';
+import { MotionProvider, PageTransition, SectionProgress } from '@/components/motion';
 import { useRouter } from '@/lib/router';
 import { portfolioData } from '@/data/portfolioData';
 
@@ -55,37 +56,41 @@ const App = () => {
   }, [isHome]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-base text-ink">
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-base focus:text-sm focus:font-medium"
-      >
-        Skip to main content
-      </a>
+    <MotionProvider>
+      <div className="min-h-screen flex flex-col bg-base text-ink">
+        <SectionProgress />
 
-      <Navbar activeSection={activeSection} isHome={isHome} onNavigate={navigate} />
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-base focus:text-sm focus:font-medium"
+        >
+          Skip to main content
+        </a>
 
-      <main id="main-content" className="flex-1">
-        {projectSlug ? (
-          <ProjectDetail slug={projectSlug} onNavigate={navigate} />
-        ) : !isHome ? (
-          <ProjectDetail slug="" onNavigate={navigate} />
-        ) : (
-          <>
-            <Hero onNavigate={navigate} />
-            <SelectedWork onNavigate={navigate} />
-            <Capabilities />
-            <ExperienceResearch />
-            <About />
-            <CurrentlyExploring />
-            <Contact />
-          </>
-        )}
-      </main>
+        <Navbar activeSection={activeSection} isHome={isHome} onNavigate={navigate} />
 
-      <Footer onNavigate={navigate} />
-      <BackToTop />
-    </div>
+        <main id="main-content" className="flex-1">
+          {projectSlug ? (
+            <ProjectDetail slug={projectSlug} onNavigate={navigate} />
+          ) : !isHome ? (
+            <ProjectDetail slug="" onNavigate={navigate} />
+          ) : (
+            <PageTransition routeKey="home">
+              <Hero onNavigate={navigate} />
+              <SelectedWork onNavigate={navigate} />
+              <Capabilities />
+              <ExperienceResearch />
+              <About />
+              <CurrentlyExploring />
+              <Contact />
+            </PageTransition>
+          )}
+        </main>
+
+        <Footer onNavigate={navigate} />
+        <BackToTop />
+      </div>
+    </MotionProvider>
   );
 };
 

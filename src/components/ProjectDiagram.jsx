@@ -1,12 +1,10 @@
 import React from 'react';
 import { useInViewOnce } from '@/lib/motion';
+import { AnimatedLine } from '@/components/motion';
 import { cn } from '@/lib/utils';
 
 const DiagramBox = ({ x, y, w, h, title, sub, accent = false, delay = 0 }) => (
-  <g
-    className="diagram-node"
-    style={{ animationDelay: `${delay}ms` }}
-  >
+  <g className="diagram-node" style={{ animationDelay: `${delay}ms` }}>
     <rect
       x={x}
       y={y}
@@ -45,17 +43,7 @@ const DiagramBox = ({ x, y, w, h, title, sub, accent = false, delay = 0 }) => (
 
 const Arrow = ({ x1, y1, x2, y2, delay = 0 }) => (
   <g>
-    <line
-      x1={x1}
-      y1={y1}
-      x2={x2}
-      y2={y2}
-      stroke="#343E4D"
-      strokeWidth="1.25"
-      pathLength="1"
-      className="diagram-connector"
-      style={{ animationDelay: `${delay}ms` }}
-    />
+    <AnimatedLine x1={x1} y1={y1} x2={x2} y2={y2} delay={delay} />
     <polygon
       points={`${x2},${y2} ${x2 - 6},${y2 - 3.5} ${x2 - 6},${y2 + 3.5}`}
       fill="#98A2B3"
@@ -66,7 +54,7 @@ const Arrow = ({ x1, y1, x2, y2, delay = 0 }) => (
 );
 
 const ProjectDiagram = ({ type, compact = false }) => {
-  const [ref, isVisible] = useInViewOnce({ threshold: 0.15 });
+  const [ref, isVisible] = useInViewOnce({ threshold: 0.05 });
 
   const labelMap = {
     rag: 'RAG-Based AI Document Chatbot architecture diagram',
@@ -131,14 +119,12 @@ const ProjectDiagram = ({ type, compact = false }) => {
             <Arrow x1={362} y1={160} x2={402} y2={160} delay={340} />
             <DiagramBox x={402} y={132} w={142} h={56} title="Grounded Answer" sub="JSON Response" delay={380} />
 
-            <path
+            <AnimatedLine
               d="M 492 92 L 492 112 L 280 112 L 280 132"
-              fill="none"
               stroke="#A5B9FF"
               strokeWidth="1.15"
-              strokeDasharray="4 3"
-              className="diagram-dashed"
-              style={{ animationDelay: '300ms' }}
+              dashed
+              delay={300}
             />
           </>
         )}
@@ -146,46 +132,19 @@ const ProjectDiagram = ({ type, compact = false }) => {
         {type === 'graphrag' && (
           <>
             <DiagramBox x={20} y={82} w={108} h={56} title="Query API" sub="Python Endpoint" delay={0} />
-            <path
-              d="M 128 110 L 154 110 L 154 58 L 178 58"
-              fill="none"
-              stroke="#343E4D"
-              strokeWidth="1.25"
-              pathLength="1"
-              className="diagram-connector"
-              style={{ animationDelay: '70ms' }}
-            />
-            <path
-              d="M 128 110 L 154 110 L 154 162 L 178 162"
-              fill="none"
-              stroke="#343E4D"
-              strokeWidth="1.25"
-              pathLength="1"
-              className="diagram-connector"
-              style={{ animationDelay: '100ms' }}
-            />
+            <AnimatedLine d="M 128 110 L 154 110 L 154 58 L 178 58" delay={70} />
+            <AnimatedLine d="M 128 110 L 154 110 L 154 162 L 178 162" delay={100} />
 
             <DiagramBox x={178} y={30} w={146} h={56} title="Neo4j Graph Store" sub="Entity Relations" accent delay={140} />
             <DiagramBox x={178} y={134} w={146} h={56} title="Vector Search" sub="Semantic Match" delay={170} />
 
-            <path
+            <AnimatedLine
               d="M 324 58 L 354 58 L 354 110 L 378 110"
-              fill="none"
               stroke="#A5B9FF"
               strokeWidth="1.15"
-              pathLength="1"
-              className="diagram-connector"
-              style={{ animationDelay: '230ms' }}
+              delay={230}
             />
-            <path
-              d="M 324 162 L 354 162 L 354 110 L 378 110"
-              fill="none"
-              stroke="#343E4D"
-              strokeWidth="1.25"
-              pathLength="1"
-              className="diagram-connector"
-              style={{ animationDelay: '250ms' }}
-            />
+            <AnimatedLine d="M 324 162 L 354 162 L 354 110 L 378 110" delay={250} />
 
             <DiagramBox x={378} y={82} w={162} h={56} title="Hybrid Context" sub="Graph + Vector Result" accent delay={300} />
           </>
@@ -203,23 +162,15 @@ const ProjectDiagram = ({ type, compact = false }) => {
 
             <DiagramBox x={72} y={134} w={196} h={52} title="Metrics Evaluation" sub="Precision · Recall · F1 · Matrix" delay={320} />
             <DiagramBox x={294} y={134} w={196} h={52} title="Visual Inspection" sub="Grad-CAM · Streamlit Study" delay={360} />
-            <path
+            <AnimatedLine
               d="M 496 96 L 496 116 L 170 116 L 170 134"
-              fill="none"
-              stroke="#343E4D"
               strokeWidth="1.15"
-              pathLength="1"
-              className="diagram-connector"
-              style={{ animationDelay: '280ms' }}
+              delay={280}
             />
-            <path
+            <AnimatedLine
               d="M 392 116 L 392 134"
-              fill="none"
-              stroke="#343E4D"
               strokeWidth="1.15"
-              pathLength="1"
-              className="diagram-connector"
-              style={{ animationDelay: '320ms' }}
+              delay={320}
             />
           </>
         )}

@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SectionHeader from '@/components/SectionHeader';
-import Reveal from '@/components/Reveal';
+import { Reveal, SectionDivider } from '@/components/motion';
 import { portfolioData } from '@/data/portfolioData';
 
 const Contact = () => {
@@ -64,8 +64,9 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-16 md:py-24 border-t border-subtle/80">
-      <div className="max-w-content mx-auto px-5 sm:px-8 lg:px-10">
+    <section id="contact" className="relative">
+      <SectionDivider />
+      <div className="py-16 md:py-24 max-w-content mx-auto px-5 sm:px-8 lg:px-10">
         <SectionHeader index="06" label="Contact" title={heading} />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">

@@ -1,5 +1,28 @@
 import { useEffect, useRef, useState } from 'react';
 
+export const MOTION_CONFIG = {
+  durations: {
+    fast: 160,
+    base: 240,
+    reveal: 400,
+    diagram: 360,
+    line: 420,
+  },
+  easing: {
+    standard: 'cubic-bezier(0.2, 0, 0, 1)',
+  },
+  distances: {
+    revealY: 10,
+    slideX: 12,
+    heroY: 8,
+  },
+  stagger: {
+    tight: 55,
+    base: 75,
+    hero: 55,
+  },
+};
+
 export function prefersReducedMotion() {
   if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
     return false;

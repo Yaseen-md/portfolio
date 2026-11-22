@@ -1,14 +1,15 @@
 import React from 'react';
 import SectionHeader from '@/components/SectionHeader';
-import Reveal from '@/components/Reveal';
+import { Reveal, SectionDivider } from '@/components/motion';
 import { portfolioData } from '@/data/portfolioData';
 
 const ExperienceResearch = () => {
   const { experienceAndResearch } = portfolioData;
 
   return (
-    <section id="experience" className="py-16 md:py-24 border-t border-subtle/80">
-      <div className="max-w-content mx-auto px-5 sm:px-8 lg:px-10">
+    <section id="experience" className="relative">
+      <SectionDivider />
+      <div className="py-16 md:py-24 max-w-content mx-auto px-5 sm:px-8 lg:px-10">
         <SectionHeader
           index="03"
           label="Experience & Research"
@@ -16,13 +17,22 @@ const ExperienceResearch = () => {
           description="Chronological record of hands-on testing, cloud internship exposure, published research, technical recruiting, and academic training."
         />
 
-        <div className="divide-y divide-subtle border-y border-subtle">
+        <div className="relative pl-6 sm:pl-8 border-l border-subtle space-y-0 divide-y divide-subtle/70">
           {experienceAndResearch.map((entry, idx) => (
-            <Reveal key={`${entry.title}-${idx}`} delay={Math.min(idx * 55, 220)}>
-              <div className="py-6 sm:py-7 grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-8">
+            <Reveal
+              key={`${entry.title}-${idx}`}
+              delay={Math.min(idx * 55, 220)}
+            >
+              <div className="group relative py-6 sm:py-7 first:pt-2 last:pb-2 grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-8">
+                {/* Timeline Node */}
+                <span
+                  aria-hidden="true"
+                  className="absolute -left-[29px] sm:-left-[37px] top-8 first:top-4 w-2.5 h-2.5 rounded-full border border-strong bg-base transition-colors duration-fast group-hover:border-accent group-hover:bg-accent/30"
+                />
+
                 {/* Left Metadata Column */}
                 <div className="md:col-span-4 lg:col-span-3 flex flex-row md:flex-col flex-wrap items-center md:items-start gap-2 md:gap-1.5">
-                  <span className="font-mono text-[11px] uppercase tracking-[0.08em] px-2 py-0.5 rounded-sm border border-subtle bg-surface text-accent">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.08em] px-2 py-0.5 rounded-sm border border-subtle bg-surface text-accent transition-colors duration-fast group-hover:border-strong">
                     {entry.category}
                   </span>
                   <span className="font-mono text-xs text-muted">{entry.period}</span>

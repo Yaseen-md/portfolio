@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import SectionHeader from '@/components/SectionHeader';
 import ProjectCard from '@/components/ProjectCard';
-import Reveal from '@/components/Reveal';
+import { Reveal, StaggerGroup, SectionDivider } from '@/components/motion';
 import { portfolioData } from '@/data/portfolioData';
 
 const SelectedWork = ({ onNavigate }) => {
@@ -11,8 +11,9 @@ const SelectedWork = ({ onNavigate }) => {
   const secondaryProjects = featuredProjects.slice(1);
 
   return (
-    <section id="work" className="py-16 md:py-24 border-t border-subtle/80">
-      <div className="max-w-content mx-auto px-5 sm:px-8 lg:px-10">
+    <section id="work" className="relative">
+      <SectionDivider />
+      <div className="py-16 md:py-24 max-w-content mx-auto px-5 sm:px-8 lg:px-10">
         <SectionHeader
           index="01"
           label="Selected Work"
@@ -28,13 +29,20 @@ const SelectedWork = ({ onNavigate }) => {
         )}
 
         {/* Remaining Featured Projects — Staggered Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {secondaryProjects.map((project, idx) => (
-            <Reveal key={project.slug} delay={idx * 70} className="h-full">
-              <ProjectCard project={project} onNavigate={onNavigate} />
-            </Reveal>
+        <StaggerGroup
+          baseDelay={50}
+          stagger={75}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          itemClassName="h-full"
+        >
+          {secondaryProjects.map((project) => (
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              onNavigate={onNavigate}
+            />
           ))}
-        </div>
+        </StaggerGroup>
 
         {/* Compact Additional Repository Reference */}
         {otherProjects.length > 0 && (

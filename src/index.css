@@ -61,6 +61,16 @@
   }
 }
 
+/* Futuristic Minimalism Atmosphere (Hero Grid & Ambient Light) */
+.hero-tech-grid {
+  background-image:
+    linear-gradient(to right, rgb(var(--border-subtle) / 0.32) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--border-subtle) / 0.32) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 10%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 10%, transparent 80%);
+}
+
 /* Hero & Page Entrance */
 @keyframes heroFadeIn {
   from {
@@ -73,19 +83,19 @@
   }
 }
 
-.hero-enter {
-  animation: heroFadeIn 240ms cubic-bezier(0.2, 0, 0, 1) both;
+.hero-seq {
+  animation: heroFadeIn 320ms cubic-bezier(0.2, 0, 0, 1) both;
 }
 
 .page-enter {
   animation: heroFadeIn 260ms cubic-bezier(0.2, 0, 0, 1) both;
 }
 
-/* One-shot Scroll Reveal */
+/* One-shot Scroll Reveal Primitives */
 .reveal-base {
   transition:
-    opacity 380ms cubic-bezier(0.2, 0, 0, 1),
-    transform 380ms cubic-bezier(0.2, 0, 0, 1);
+    opacity 400ms cubic-bezier(0.2, 0, 0, 1),
+    transform 400ms cubic-bezier(0.2, 0, 0, 1);
   will-change: opacity, transform;
 }
 
@@ -97,6 +107,28 @@
 .reveal-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.slide-hidden-left {
+  opacity: 0;
+  transform: translateX(-12px);
+}
+
+.slide-hidden-right {
+  opacity: 0;
+  transform: translateX(12px);
+}
+
+.fade-base {
+  transition: opacity 360ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.fade-hidden {
+  opacity: 0;
+}
+
+.fade-visible {
+  opacity: 1;
 }
 
 /* Architecture Diagram One-Shot Animations */
@@ -163,6 +195,9 @@
   }
 
   .reveal-hidden,
+  .slide-hidden-left,
+  .slide-hidden-right,
+  .fade-hidden,
   .diagram-node,
   .diagram-connector,
   .diagram-dashed {

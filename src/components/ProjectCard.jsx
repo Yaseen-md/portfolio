@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Github, AlertCircle } from 'lucide-react';
 import ProjectDiagram from '@/components/ProjectDiagram';
+import { GlowCard } from '@/components/motion';
 import { cn } from '@/lib/utils';
 
 const ProjectCard = ({ project, lead = false, onNavigate }) => {
@@ -12,16 +13,17 @@ const ProjectCard = ({ project, lead = false, onNavigate }) => {
   };
 
   return (
-    <article
+    <GlowCard
+      as="article"
       className={cn(
-        'group rounded-xl border border-subtle bg-surface transition-[border-color,background-color,transform] duration-base ease-standard hover:-translate-y-0.5 hover:border-strong hover:bg-elevated/50 focus-within:border-strong overflow-hidden',
+        'group rounded-xl border border-subtle bg-surface transition-[border-color,background-color,transform] duration-base ease-standard hover:-translate-y-0.5 hover:border-strong hover:bg-elevated/45 focus-within:border-strong',
         lead ? 'grid grid-cols-1 lg:grid-cols-12' : 'flex flex-col h-full'
       )}
     >
       {/* Diagram / Visual Frame */}
       <div
         className={cn(
-          'border-subtle bg-base overflow-hidden',
+          'relative border-subtle bg-base overflow-hidden',
           lead
             ? 'lg:col-span-7 border-b lg:border-b-0 lg:border-r min-h-[220px] lg:min-h-[300px]'
             : 'border-b aspect-[16/10]'
@@ -35,7 +37,7 @@ const ProjectCard = ({ project, lead = false, onNavigate }) => {
       {/* Content Column */}
       <div
         className={cn(
-          'flex flex-col justify-between',
+          'relative z-10 flex flex-col justify-between',
           lead ? 'lg:col-span-5 p-5 sm:p-6 lg:p-8' : 'p-5 sm:p-6 flex-1'
         )}
       >
@@ -75,7 +77,7 @@ const ProjectCard = ({ project, lead = false, onNavigate }) => {
             {project.tags.map((tag) => (
               <li
                 key={tag}
-                className="font-mono text-[11px] px-2.5 py-1 rounded-sm bg-elevated border border-subtle text-secondary"
+                className="font-mono text-[11px] px-2.5 py-1 rounded-sm bg-elevated border border-subtle text-secondary transition-colors duration-fast group-hover:border-strong/80"
               >
                 {tag}
               </li>
@@ -111,7 +113,7 @@ const ProjectCard = ({ project, lead = false, onNavigate }) => {
           )}
         </div>
       </div>
-    </article>
+    </GlowCard>
   );
 };
 
