@@ -120,3 +120,17 @@ export function useIsInView(options = {}) {
 
   return [ref, inView];
 }
+
+export function useDiagramVisibility() {
+  const [onceRef, isVisible] = useInViewOnce({ threshold: 0.05 });
+  const [liveRef, isCurrentlyInView] = useIsInView({ threshold: 0.01 });
+
+  const ref = (node) => {
+    onceRef.current = node;
+    liveRef.current = node;
+  };
+
+  const isPaused = !prefersReducedMotion() && isVisible && !isCurrentlyInView;
+
+  return { ref, isVisible, isPaused };
+}

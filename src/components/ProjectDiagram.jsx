@@ -1,6 +1,6 @@
 import React from 'react';
-import { useInViewOnce, useIsInView } from '@/lib/motion';
-import { AnimatedLine, useMotion } from '@/components/motion';
+import { useDiagramVisibility } from '@/lib/motion';
+import { AnimatedLine } from '@/components/motion';
 import { cn } from '@/lib/utils';
 
 const DiagramBox = ({
@@ -139,17 +139,9 @@ const Arrow = ({ x1, y1, x2, y2, delay = 0, flowDelay = 0, glowId }) => (
 );
 
 const ProjectDiagram = ({ type, compact = false }) => {
-  const [onceRef, isVisible] = useInViewOnce({ threshold: 0.05 });
-  const [liveRef, isCurrentlyInView] = useIsInView({ threshold: 0.01 });
-  const { reducedMotion } = useMotion();
-
-  const setRefs = (node) => {
-    onceRef.current = node;
-    liveRef.current = node;
-  };
+  const { ref, isVisible, isPaused } = useDiagramVisibility();
 
   const glowId = `pulse-glow-${type}`;
-  const isPaused = !reducedMotion && isVisible && !isCurrentlyInView;
 
   const labelMap = {
     rag: 'RAG-Based AI Document Chatbot architecture diagram',
@@ -160,7 +152,7 @@ const ProjectDiagram = ({ type, compact = false }) => {
 
   return (
     <div
-      ref={setRefs}
+      ref={ref}
       className={cn(
         'relative w-full h-full bg-base flex flex-col justify-between p-4 sm:p-5 select-none',
         isVisible && 'diagram-active',

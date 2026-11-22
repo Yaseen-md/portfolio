@@ -6,11 +6,30 @@ import {
   SlideReveal,
   GlowCard,
   SectionDivider,
-  useMotion,
 } from '@/components/motion';
-import { useInViewOnce, useIsInView } from '@/lib/motion';
+import { useDiagramVisibility } from '@/lib/motion';
 import { portfolioData } from '@/data/portfolioData';
 import { cn } from '@/lib/utils';
+
+const MobileFlowConnector = ({ height = 28, delay = 0 }) => (
+  <div aria-hidden="true" className="md:hidden flex justify-center py-1">
+    <svg width="24" height={height} viewBox={`0 0 24 ${height}`}>
+      <line x1="12" y1="0" x2="12" y2={height} stroke="#242B35" strokeWidth="1.25" />
+      <line
+        x1="12"
+        y1="0"
+        x2="12"
+        y2={height}
+        stroke="#A5B9FF"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        pathLength="100"
+        className="diagram-flow-pulse"
+        style={{ animationDelay: `${delay}ms` }}
+      />
+    </svg>
+  </div>
+);
 
 const PHILOSOPHY_PILLARS = [
   {
@@ -38,16 +57,7 @@ const PHILOSOPHY_PILLARS = [
 
 const About = () => {
   const { pullLine, paragraphs } = portfolioData.about;
-  const { reducedMotion } = useMotion();
-  const [onceRef, isVisible] = useInViewOnce({ threshold: 0.05 });
-  const [liveRef, isCurrentlyInView] = useIsInView({ threshold: 0.01 });
-
-  const setDiagramRefs = (node) => {
-    onceRef.current = node;
-    liveRef.current = node;
-  };
-
-  const isPaused = !reducedMotion && isVisible && !isCurrentlyInView;
+  const { ref: setDiagramRefs, isVisible, isPaused } = useDiagramVisibility();
 
   return (
     <section id="about" className="relative">
@@ -146,33 +156,7 @@ const About = () => {
 
                     {/* Mobile Vertical Flow Connector between pillars */}
                     {idx < PHILOSOPHY_PILLARS.length - 1 && (
-                      <div
-                        aria-hidden="true"
-                        className="md:hidden flex justify-center py-1"
-                      >
-                        <svg width="24" height="28" viewBox="0 0 24 28">
-                          <line
-                            x1="12"
-                            y1="0"
-                            x2="12"
-                            y2="28"
-                            stroke="#242B35"
-                            strokeWidth="1.25"
-                          />
-                          <line
-                            x1="12"
-                            y1="0"
-                            x2="12"
-                            y2="28"
-                            stroke="#A5B9FF"
-                            strokeWidth="1.6"
-                            strokeLinecap="round"
-                            pathLength="100"
-                            className="diagram-flow-pulse"
-                            style={{ animationDelay: `${idx * 350}ms` }}
-                          />
-                        </svg>
-                      </div>
+                      <MobileFlowConnector height={28} delay={idx * 350} />
                     )}
                   </Reveal>
                 );
@@ -288,23 +272,7 @@ const About = () => {
             </div>
 
             {/* Mobile Connector into Outcome */}
-            <div aria-hidden="true" className="md:hidden flex justify-center py-1">
-              <svg width="24" height="30" viewBox="0 0 24 30">
-                <line x1="12" y1="0" x2="12" y2="30" stroke="#242B35" strokeWidth="1.25" />
-                <line
-                  x1="12"
-                  y1="0"
-                  x2="12"
-                  y2="30"
-                  stroke="#A5B9FF"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  pathLength="100"
-                  className="diagram-flow-pulse"
-                  style={{ animationDelay: '700ms' }}
-                />
-              </svg>
-            </div>
+            <MobileFlowConnector height={30} delay={700} />
 
             {/* Final Converged Outcome Node */}
             <Reveal delay={240}>
